@@ -37,7 +37,7 @@ func Execute() {
 		runLocal(flag.Args()[1:])
 		
 	case "ssh":
-		fmt.Println("SSH module will be added soon.")
+		runSSH(flag.Args()[1:])
 		
 	case "k8s":
 		fmt.Println("Kubernetes module will be added soon.")
