@@ -40,15 +40,15 @@ func Execute() {
 		
 	case "ssh":
 		// Henüz yazılmadı, ilerleyen tasklarda dolduracağız.
-		fmt.Println("SSH modülü yakında eklenecek.")
+		fmt.Println("SSH module will be added soon.")
 		
 	case "k8s":
 		// Henüz yazılmadı, ilerleyen tasklarda dolduracağız.
-		fmt.Println("Kubernetes modülü yakında eklenecek.")
+		fmt.Println("Kubernetes module will be added soon.")
 		
 	default:
-		fmt.Printf("Bilinmeyen komut: '%s'\n", command)
-		fmt.Println("Yardım için 'contest --help' yazabilirsiniz.")
+		fmt.Printf("Unknown command: '%s'\n", command)
+		fmt.Println("For help, type 'contest --help'.")
 		os.Exit(1)
 	}
 }
