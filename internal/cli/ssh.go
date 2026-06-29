@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"contest-cli/internal/tester/ssh"
 	"flag"
 	"fmt"
 	"strings"
@@ -28,9 +29,13 @@ func runSSH(args []string) {
 
 	for _, host := range rawHosts {
 		cleanHost := strings.TrimSpace(host)
-		
-		fmt.Printf("-> SSH ile %s@%s Connection\n with privkey %s and proto %s and port %s\n", *userFlag, cleanHost, *keyFlag, *protoFlag, *portFlag)
-		//TODO: link ssh connection logic
-		
+
+		fmt.Printf("-> SSH ile %s@%s Connection\n with privkey %s and proto %s and port %s and ssh user %s\n", *userFlag, cleanHost, *keyFlag, *protoFlag, *portFlag, *userFlag)
+		result := ssh.RunSSH(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
+		if !result.Success {
+			fmt.Printf("Output: %s\nError: %v\n", result.Output, result.Error)
+		} else {
+			fmt.Printf("Success: %s\n", result.Output)
+		}
 	}
 }
