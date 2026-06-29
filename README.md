@@ -12,5 +12,5 @@ Contest-cli is a tool to test network connection from source to destinations.
 # Current Status:
 - Protocols: TCP & UDP are ready.
 
-- Source: Local only.
+- Source: Local, SSH(TCP Only).
 
