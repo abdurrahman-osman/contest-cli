@@ -9,8 +9,13 @@ Contest-cli is a tool to test network connection from source to destinations.
 
 3. Various source options: local, k8s, ssh, etc.
 
-# Current Status:
+## Current Status:
 - Protocols: TCP & UDP are ready.
 
 - Source: Local, SSH(TCP Only).
+
+## Examples:
+```
+contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts 10.218.16.80 --key=~/.ssh/key --user=username
+```
 
