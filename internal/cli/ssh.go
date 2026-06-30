@@ -15,12 +15,12 @@ func runSSH(args []string) {
 	keyFlag := sshCmd.String("key", "", "Optional: SSH Private Key file path")
 	targetFlag := sshCmd.String("target", "", "Target IP:Port to test connectivity (Required) (Example: 192.168.1.10:9092)")
 	protoFlag := sshCmd.String("proto", "tcp", "Protocol to use (tcp or udp)")
-	portFlag := sshCmd.String("port", "80", "Target Port (örn: 9092)(Default: 80)")
+	portFlag := sshCmd.String("port", "", "Target Port (e.x: 9092)")
 
 	sshCmd.Parse(args)
 
 	if *hostsFlag == "" || *targetFlag == "" {
-		fmt.Println("Error: --hosts and --target flags are required!")
+		fmt.Println("Error: --hosts, --target flags are required!")
 		sshCmd.Usage()
 		return
 	}
@@ -29,8 +29,6 @@ func runSSH(args []string) {
 
 	for _, host := range rawHosts {
 		cleanHost := strings.TrimSpace(host)
-
-		fmt.Printf("-> SSH ile %s@%s Connection\n with privkey %s and proto %s and port %s and ssh user %s\n", *userFlag, cleanHost, *keyFlag, *protoFlag, *portFlag, *userFlag)
 		result := ssh.RunSSH(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
 		if !result.Success {
 			fmt.Printf("Output: %s\nError: %v\n", result.Output, result.Error)

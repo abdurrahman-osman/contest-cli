@@ -37,6 +37,18 @@ func RunSSH(user, host, key, target, proto, port string) TestResult {
 		}
 	}
 
+	if port != "" {
+		targetPort = port
+	}
+	if targetPort == "" {
+		return TestResult{
+			Success:  false,
+			Duration: time.Since(start),
+			Output:   "",
+			Error:    fmt.Errorf("target port is required"),
+		}
+	}
+
 	remoteCmd := fmt.Sprintf("nc -vz -w 3 %s %s", targetHost, targetPort)
 
 	args := []string{

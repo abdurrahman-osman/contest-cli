@@ -21,7 +21,7 @@ mkdir bin && go build -o bin/contest cmd/contest/main.go
 
 ## Examples:
 ```
-contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts 10.218.16.80 --key=~/.ssh/key --user=username
+contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts <IP-or-Hostname> --key=~/.ssh/key --user=username
 ```
 
 ## TODO
