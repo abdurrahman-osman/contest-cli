@@ -28,7 +28,7 @@ func SplitTargetAndPort(target string) (string, string, error) {
 	if !IsHostnameValid(target) {
 		return "", "", fmt.Errorf("invalid hostname format: %s", target)
 	}
-	return target, "80", nil
+	return target, "", nil
 }
 
 func IsPortValid(port string) bool {
