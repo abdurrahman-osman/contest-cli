@@ -13,8 +13,11 @@ Contest-cli is a tool to test network connection from source to destinations.
 - Protocols: TCP & UDP are ready.
 
 - Source: Local, SSH(TCP Only).
-## Build
 
+## Build( go 1.25.6)
+```
+mkdir bin && go build -o bin/contest cmd/contest/main.go
+```
 
 ## Examples:
 ```
