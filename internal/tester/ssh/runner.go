@@ -36,9 +36,6 @@ func RunSSH(user, host, key, target, proto, port string) TestResult {
 			Error:    err,
 		}
 	}
-	if port != "" {
-		targetPort = port
-	}
 
 	remoteCmd := fmt.Sprintf("nc -vz -w 3 %s %s", targetHost, targetPort)
 
