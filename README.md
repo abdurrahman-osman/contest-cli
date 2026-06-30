@@ -19,3 +19,9 @@ Contest-cli is a tool to test network connection from source to destinations.
 contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts 10.218.16.80 --key=~/.ssh/key --user=username
 ```
 
+## TODO
+- Ability to parse multiple hosts for ssh.
+- Multi host targets.
+- Multi port targets.
+- Multi protocol targets.
+
