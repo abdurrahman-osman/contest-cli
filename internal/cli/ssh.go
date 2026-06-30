@@ -17,7 +17,11 @@ func runSSH(args []string) {
 	protoFlag := sshCmd.String("proto", "tcp", "Protocol to use (tcp or udp)")
 	portFlag := sshCmd.String("port", "", "Target Port (e.x: 9092)")
 
-	sshCmd.Parse(args)
+	err := sshCmd.Parse(args)
+	if err != nil {
+		fmt.Printf("failed to parse args: %v\n", err)
+		return
+	}
 
 	if *hostsFlag == "" || *targetFlag == "" {
 		fmt.Println("Error: --hosts, --target flags are required!")
@@ -29,7 +33,7 @@ func runSSH(args []string) {
 
 	for _, host := range rawHosts {
 		cleanHost := strings.TrimSpace(host)
-		result := ssh.RunSSH(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
+		result := ssh.RunSSH2(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
 		if !result.Success {
 			fmt.Printf("Output: %s\nError: %v\n", result.Output, result.Error)
 		} else {
