@@ -33,7 +33,7 @@ func runSSH(args []string) {
 
 	for _, host := range rawHosts {
 		cleanHost := strings.TrimSpace(host)
-		result := ssh.RunSSH2(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
+		result := ssh.RunSSHGo(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
 		if !result.Success {
 			fmt.Printf("Output: %s\nError: %v\n", result.Output, result.Error)
 		} else {

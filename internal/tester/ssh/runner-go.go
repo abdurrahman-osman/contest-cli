@@ -10,7 +10,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-func RunSSH2(user, host, key, target, proto, port string) TestResult {
+func RunSSHGo(user, host, key, target, proto, port string) TestResult {
 	start := time.Now()
 
 	validatedUser, err := utils.GetValidUserInput(user)

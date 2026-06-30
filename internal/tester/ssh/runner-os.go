@@ -14,7 +14,7 @@ type TestResult struct {
 	Error    error
 }
 
-func RunSSH(user, host, key, target, proto, port string) TestResult {
+func RunSSHOnOS(user, host, key, target, proto, port string) TestResult {
 	start := time.Now()
 	var err error
 
