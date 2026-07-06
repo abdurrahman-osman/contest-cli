@@ -25,7 +25,6 @@ contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts <IP-or-Hostnam
 ```
 
 ## TODO
-- Ability to parse multiple hosts for ssh.
 - Multi host targets.
 - Multi port targets.
 - Multi protocol targets.

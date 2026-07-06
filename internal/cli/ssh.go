@@ -31,21 +31,26 @@ func runSSH(args []string) {
 	}
 
 	rawHosts := strings.Split(*hostsFlag, ",")
+	rawTargets := strings.Split(*targetFlag, ",")
 
 	var wg sync.WaitGroup
 
 	for _, host := range rawHosts {
 		cleanHost := strings.TrimSpace(host)
-		wg.Add(1)
-		go func(h string) {
-			defer wg.Done()
-			result := ssh.RunSSHGo(*userFlag, h, *keyFlag, *targetFlag, *protoFlag, *portFlag)
-			if !result.Success {
-				fmt.Printf("Output(%s): %s\nError: %v\n", h, result.Output, result.Error)
-			} else {
-				fmt.Printf("Success(%s): %s\n", h, result.Output)
-			}
-		}(cleanHost)
+		for _, target := range rawTargets {
+			cleanTarget := strings.TrimSpace(target)
+			wg.Add(1)
+			go func(h, t string) {
+				defer wg.Done()
+				result := ssh.RunSSHGo(*userFlag, h, *keyFlag, t, *protoFlag, *portFlag)
+				if !result.Success {
+					fmt.Printf("Output(%s->%s): %s\nError: %v\n", h, t, result.Output, result.Error)
+				} else {
+					fmt.Printf("Success(%s -> %s): %s\n", h, t, result.Output)
+				}
+			}(cleanHost, cleanTarget)
+
+		}
 
 	}
 	wg.Wait()
