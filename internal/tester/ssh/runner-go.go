@@ -35,7 +35,7 @@ func RunSSHGo(user, host, key, target, proto, port string) TestResult {
 		}
 	}
 
-	// Add default key if not entered.
+	// Add default key if not provided.
 	if key == "" {
 		key = "~/.ssh/id_rsa"
 	}

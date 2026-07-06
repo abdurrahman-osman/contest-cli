@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"strings"
+	"sync"
 )
 
 func runSSH(args []string) {
@@ -31,13 +32,21 @@ func runSSH(args []string) {
 
 	rawHosts := strings.Split(*hostsFlag, ",")
 
+	var wg sync.WaitGroup
+
 	for _, host := range rawHosts {
 		cleanHost := strings.TrimSpace(host)
-		result := ssh.RunSSHGo(*userFlag, cleanHost, *keyFlag, *targetFlag, *protoFlag, *portFlag)
-		if !result.Success {
-			fmt.Printf("Output: %s\nError: %v\n", result.Output, result.Error)
-		} else {
-			fmt.Printf("Success: %s\n", result.Output)
-		}
+		wg.Add(1)
+		go func(h string) {
+			defer wg.Done()
+			result := ssh.RunSSHGo(*userFlag, h, *keyFlag, *targetFlag, *protoFlag, *portFlag)
+			if !result.Success {
+				fmt.Printf("Output(%s): %s\nError: %v\n", h, result.Output, result.Error)
+			} else {
+				fmt.Printf("Success(%s): %s\n", h, result.Output)
+			}
+		}(cleanHost)
+
 	}
+	wg.Wait()
 }
