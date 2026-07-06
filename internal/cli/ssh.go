@@ -44,7 +44,7 @@ func runSSH(args []string) {
 				defer wg.Done()
 				result := ssh.RunSSHGo(*userFlag, h, *keyFlag, t, *protoFlag, *portFlag)
 				if !result.Success {
-					fmt.Printf("Output(%s->%s): %s\nError: %v\n", h, t, result.Output, result.Error)
+					fmt.Printf("Output(%s->%s): %s\nConnection failed with Error: %v\n", h, t, result.Output, result.Error)
 				} else {
 					fmt.Printf("Success(%s -> %s): %s\n", h, t, result.Output)
 				}

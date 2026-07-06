@@ -59,3 +59,10 @@ func GetValidUserInput(user string) (string, error) {
 	}
 	return user, nil
 }
+
+func IsProtoValid(proto string) bool {
+	if strings.ToLower(proto) == "tcp" || strings.ToLower(proto) == "udp" {
+		return true
+	}
+	return false
+}

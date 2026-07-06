@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 	"time"
 
 	"golang.org/x/crypto/ssh"
@@ -32,6 +33,20 @@ func RunSSHGo(user, host, key, target, proto, port string) TestResult {
 			Success:  false,
 			Duration: time.Since(start),
 			Error:    fmt.Errorf("target port is required"),
+		}
+	}
+
+	var remoteCmd string
+	switch strings.ToLower(proto) {
+	case "tcp":
+		remoteCmd = fmt.Sprintf("nc -vz -w 3 %s %s", targetHost, targetPort)
+	case "udp":
+		remoteCmd = fmt.Sprintf("nc -uvz -w 3 %s %s", targetHost, targetPort)
+	default:
+		return TestResult{
+			Success:  false,
+			Duration: time.Since(start),
+			Error:    fmt.Errorf("%s protocol is not supported", proto),
 		}
 	}
 
@@ -85,8 +100,6 @@ func RunSSHGo(user, host, key, target, proto, port string) TestResult {
 			fmt.Printf("session close error: %v\n", err)
 		}
 	}(session)
-
-	remoteCmd := fmt.Sprintf("nc -vz -w 3 %s %s", targetHost, targetPort)
 
 	output, err := session.CombinedOutput(remoteCmd)
 	if err != nil {
