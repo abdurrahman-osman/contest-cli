@@ -25,7 +25,12 @@ contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts <IP-or-Hostnam
 ```
 
 ## TODO
-- Multi host targets.
+- Multi host targets. Done.
 - Multi port targets.
-- Multi protocol targets.
+- Add UDP Target Protocol Support
+- Add HTTP Target Protocol Support
+- Add HTTPs Target Protocol Support
+- Add gRPC Target Protocol Support
+- Add Kafka Target ProtocolSupport
+- Multi Protocol targets.
 
