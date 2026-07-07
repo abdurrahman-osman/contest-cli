@@ -33,4 +33,5 @@ contest ssh --target=google.com:80 --proto=tcp --port=443 --hosts <IP-or-Hostnam
 - Add gRPC Target Protocol Support
 - Add Kafka Target ProtocolSupport
 - Multi Protocol targets.
+- Web UI Support
 
